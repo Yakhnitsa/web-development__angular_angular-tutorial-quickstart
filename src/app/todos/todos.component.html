@@ -1,0 +1,56 @@
+<div *ngIf="!loading">
+  <div class="filter">
+    <input type="text"
+           class="form-control my-2"
+           [(ngModel)]="searchString"
+           placeholder="Filter by title..."
+    />
+  </div>
+
+
+  <table *ngIf="todoService.todos.length; else noTodos"  class="table table-sm table-striped table-hover">
+    <thead class="thead-light">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">complete</th>
+      <th scope="col">What to do</th>
+      <th scope="col">Date</th>
+      <th scope="col">delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let todo of todoService.todos | todosFilter:searchString, let i = index" >
+      <td>{{i+1}}</td>
+      <td>
+        <input type="checkbox" [checked]="todo.completed" (change)="onChange(todo.id)">
+      </td>
+      <td [class.done]="todo.completed">{{todo.title}}</td>
+      <td>{{todo.date | date : 'yyyy MMM d'}}</td>
+      <td>
+        <button class="rm" (click)="remove(todo.id)">&times;</button>
+      </td>
+
+
+    </tr>
+    </tbody>
+  </table>
+  <ng-template #noTodos>
+    <p> not todos</p>
+  </ng-template>
+</div>
+<div *ngIf="loading" class="spinner-border" role="status">
+  <span class="sr-only">Loading...</span>
+</div>
+
+
+<!--<ul>-->
+  <!--<li *ngFor="let todo of todos, let i = index">-->
+    <!--<span>-->
+      <!--<input type="checkbox" [checked]="todo.completed">-->
+      <!--<strong>{{i + 1}} </strong>{{todo.title}}-->
+
+    <!--</span>-->
+    <!--<spall>{{todo.date}}</spall>-->
+    <!--<button class="rm">&times;</button>-->
+  <!--</li>-->
+<!--</ul>-->

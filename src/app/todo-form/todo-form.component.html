@@ -1,0 +1,18 @@
+<div>
+  <div class="row">
+    <div class="col-8">
+      <input type="text"
+             [(ngModel)]="title"
+             (keydown.enter)="addTodo()"
+             class="form-control" placeholder="What to do?">
+    </div>
+    <div class="col-2">
+      <input
+        [(ngModel)]="date"
+        type="date" class="form-control">
+    </div>
+    <div class="col-2">
+      <button class="btn btn-primary" (click)="addTodo()">Add todo</button>
+    </div>
+  </div>
+</div>
